@@ -11,26 +11,28 @@
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
 
-    renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer = new THREE.WebGLRenderer({ logarithmicDepthBuffer: true, alpha: true });
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
     geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
 
     var magenta = new THREE.Color('rgb(255,0,255)')
-    material = new THREE.MeshDepthMaterial({ wireframe: true});
+    material = new THREE.MeshBasicMaterial( { color: magenta });
 
     cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
     camera.position.z = 5;
+    cube.position.z = 0;
+
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
   };
 
   var onDocumentMouseMove = function(event) {
 
-    mouseX = ( event.clientX - window.innerWidth ) / 100;
-    mouseY = ( event.clientY - window.innerHeight ) / 100;
+    mouseX = ( event.clientX - window.innerWidth / 2 ) / 100;
+    mouseY = ( event.clientY - window.innerHeight / 2 ) / 100;
 
   };
 
